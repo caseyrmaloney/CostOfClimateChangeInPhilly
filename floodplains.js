@@ -33,6 +33,9 @@
         .range(['#deebf7', '#3182bd'])
        //console.log(floodplains.features)
 
+        var scaleCircles = d3.scaleLinear()
+        .domain(d3.extent(floodDict.values()))
+        .range([5, 15]);
 
         const svg = d3.select("#floodplains").append('g').attr('transform', 'translate(50,50)');
 
@@ -51,6 +54,25 @@
         })
         .attr("stroke", "black")
         .attr("stroke-width", "1px");
+
+        let mapCircles = svg.append('g')
+        .selectAll("circle")
+        .data(philadelphia.features)
+        .join("circle")
+        .attr("cx", (d) => {
+            return mapPath.centroid(d)[0];
+        })
+        .attr("cy", (d) => {
+            return mapPath.centroid(d)[1];
+        })
+        .attr("r", (d) => {
+            if (floodDict.has(d.properties.name)) {
+                console.log(d)
+                return scaleCircles(floodDict.get(d.properties.name))
+            }
+            else return 0;
+        })
+        .attr("fill", "#0c407c");
 
         let map2 = svg.append('g')
         .selectAll("path")
