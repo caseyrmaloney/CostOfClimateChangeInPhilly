@@ -1,7 +1,6 @@
 body{ 
     margin: 0;
-    font-family: Montserrat;
-
+    font-family: 'Noto Sans TC';
 }
 
 .headerdiv{ 
@@ -27,12 +26,48 @@ section{
 
 }
 
+p{ 
+    font-size: 20px;
+}
+
+li{ 
+    font-size: 20px;
+}
+
+
+h1{ 
+    padding: 15px 10px; 
+    text-align: center;
+    color: #19405a;
+    text-decoration: underline; 
+    
+}
 .section1{ 
     background-size: cover;
     background-attachment: fixed; 
     background: linear-gradient(#6aaef7, #ffffff);
+    justify-content: center;
+    align-items: center;
+    display: flex;
+  
+    
+}
+
+.divs{ 
+    display: inline-block;
+    justify-content: center;
+    align-items: center;
+    width: 70vw; 
+    height: 80vh;
+    
+    
+}
+
+.divsec12{ 
+   padding: 0px 30px;
    
 }
+
 
 
 
@@ -41,13 +76,25 @@ section{
     background-size: cover;
     background-attachment: fixed;
     background: linear-gradient(#ffffff, #6aaef7);
+    justify-content: center;
+    align-items: center;
+    display: flex;
+   
+}
+
+
+
+.sec2div2{ 
+    padding: 0px 30px;
 }
 
 .section3{ 
     background-size: cover;
     background-attachment: fixed;
     background: linear-gradient(#6aaef7, #ffffff);
-
+    justify-content: center;
+    align-items: center;
+    display: flex;
 
 }
 
@@ -93,6 +140,9 @@ section{
 }
 
 .section4{
+    justify-content: center;
+    align-items: center;
+    display: flex;
     background-size: cover;
     background-attachment: fixed;
     background: linear-gradient(#ffffff, #6aaef7);
@@ -106,6 +156,9 @@ section{
 }
 
 .section5{
+    justify-content: center;
+    align-items: center;
+    display: flex;
     background-size: cover;
     background-attachment: fixed;
     background: linear-gradient(#ffffff, #6aaef7);
@@ -114,6 +167,7 @@ section{
 }
 
 .floodgraph{
+   
     background-size: cover;
     background-attachment: fixed;
     background: linear-gradient(#6aaef7, #ffffff);
