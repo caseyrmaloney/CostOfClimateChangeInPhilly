@@ -61,21 +61,29 @@
         .domain([0, 4])
         .range([barHeight, 50]);
 
+       // tip = d3.tip().attr('class', 'd3-tip').html(function(d) { return d; });
+
        // console.log(yearlyFloodData)
         var blues = d3.scaleSequential()
         .domain(d3.extent(floodDict.values()))
         .range(['#deebf7', '#3182bd'])
        //console.log(floodplains.features)
 
+
         var scaleCircles = d3.scaleLinear()
         .domain(d3.extent(floodDict.values()))
         .range([5, 15]);
+        
+        d3.select('body').append('div').attr('id', 'tooltip')
+        .attr('style', 'position: absolute; opacity: 0;');
 
-        const svg = d3.select("#floodplains").append('g').attr('transform', 'translate(50,50)');
+        const svg = d3.select("#floodplains").append('g')
+        .attr('transform', 'translate(50,50)')
         const bar1 = d3.select("#bar1").append("g").attr('transform', 'translate(50,0)');
         const bar2 = d3.select("#bar2").append("g").attr('transform', 'translate(50,0)');
         var bar1Set = false;
 
+      //  svg.call(tip)
         let map = svg.append('g')
         .selectAll("path")
         .data(philadelphia.features)
@@ -90,7 +98,27 @@
             }
         })
         .attr("stroke", "black")
-        .attr("stroke-width", "1px");
+        .attr("stroke-width", "1px")
+        .on('mouseover', function(e, d) {
+            d3.select(this)
+            .attr("stroke-width", "3px")
+            d3.select('#tooltip').transition()
+            .duration(100).style('opacity', 1)
+            .text(d.properties.name)
+            //tip.show(d.);
+            //console.log(e)
+        })
+        .on('mouseout', function(e, d) {
+            d3.select(this)
+            .attr("stroke-width", "1px");
+            d3.select('#tooltip').style('opacity', 0)
+            //tip.hide;
+        })
+        .on('mousemove', function(e, d) {
+            d3.select('#tooltip')
+            .style('left', (e.pageX+10) + 'px')
+            .style('top', (e.pageY+10) + 'px')
+        })
 
         let mapCircles = svg.append('g')
         .selectAll("circle")
@@ -113,7 +141,34 @@
         .on('click', (event, d) => {
             console.log(d)
            drawBars(d.properties.name);
-        });
+        })
+        .on('mouseover', function(e,d) {
+            d3.select(this)
+            .attr("r", () => {
+                return parseInt(this.getAttribute("r")) + 3
+            })
+            .attr("stroke-width", "2px")
+            .attr("stroke", "white");
+
+            d3.select('#tooltip').transition()
+            .duration(100).style('opacity', 1)
+            .text(d.properties.name)
+        })
+        .on('mouseout', function(e, d) {
+            d3.select(this)
+            .attr("r", () => {
+                return scaleCircles(floodDict.get(d.properties.name))
+
+            })
+            .attr("stroke-width", "0px")
+            .attr("stroke", "none");
+            d3.select('#tooltip').style('opacity', 0)
+         })
+         .on('mousemove', function(e, d) {
+            d3.select('#tooltip')
+            .style('left', (e.pageX+10) + 'px')
+            .style('top', (e.pageY+10) + 'px')
+        })
 
         let map2 = svg.append('g')
         .selectAll("path")
@@ -139,8 +194,10 @@
             return "none";
         })
         .attr("stroke", "4f8fbc")
-        .attr("stroke-width", "0px");
+        .attr("stroke-width", "0px")
+       // .on('mouseover', (d) => mouseoverArea(d));
         
+       drawLegend();
         function drawBars(location) {
             data = yearlyFloodData.get(location);
             var data = Array.from(data, ([year, value]) => ({ year, value }));
@@ -148,10 +205,10 @@
            // if (!bar1Set) {
                 bar1.selectAll('rect').remove();
                 var bg = bar1.append('rect')
-                .attr("x", -30)
+                .attr("x", -35)
                 .attr("y", 5)
                 .attr("width", 600)
-                .attr("height", 380)
+                .attr("height", 385)
                 .attr("fill", "#dddddd")
                 .attr("stoke-width", "1px")
                 .attr('stroke', "black");
@@ -174,9 +231,10 @@
                 .attr("fill", "#0c407c");
                 
                 bar1.append('text') 
-                .attr("y", 25)
-                .attr("x", barWidth/2 - 25)
-                .text(location);
+                .attr("y", 27)
+                .attr("x", barWidth/2 - 40)
+                .text(location)
+                .attr("font-size", "20px");
 
                 bar1.append('text')
                 .attr('class', 'axis-title') 
@@ -225,6 +283,77 @@
             } */
         }
 
+        function drawLegend() {
+
+            svg.append('text')
+            .attr("x", 10)
+            .attr("y", 5)
+            .text("Legend")
+
+            let leg = svg.append('g')
+            .selectAll('rect')
+            .data([5])
+            .join('rect')
+            .attr("x", 10)
+            .attr("y", 10)
+            .attr("fill", "#f7f7f7")
+            .attr("height", "200px")
+            .attr("width", "180px")
+            .attr("stroke", "black")
+            .attr("stroke-width", "1px")
+
+            mapLegend = ['#d2e4f3', '#c5dcef', '#6fa8d2', '#3182bd']
+            size = 30;
+            let scale = svg.append('g')
+            .selectAll('rect')
+            .data(mapLegend)
+            .enter()
+            .append('rect')
+            .attr('x', function(d,i) {
+                return 40 + i*(size)
+            })
+            .attr("y", 40)
+            .attr("height", size)
+            .attr("width", size)
+            .attr('fill', function(d) {
+                return d;
+            })
+            svg.append('text')
+            .attr("x", 40)
+            .attr("y", 120)
+            .text("Floods")
+
+            let scale2 = svg.append('g')
+            .selectAll('circle')
+            .data([8,10,13,14])
+            .enter()
+            .append('circle')
+            .attr('cy', 90)
+            .attr('cx', function(d, i) {
+                return 44 + d*2.5*i
+            })
+            .attr("r", function(d, i ) {
+                return d
+            })
+            .attr("fill", "#0c407c")
+
+            scale3 = svg.append('g')
+            .selectAll('rect')
+            .data([5])
+            .enter()
+            .append('rect')
+            .attr("x", 40)
+            .attr("y", 150)
+            .attr("width", 120)
+            .attr("height", 15)
+            .attr("fill", "#4f8fbc")
+
+            svg.append('text')
+            .attr("x", 40)
+            .attr("y", 185)
+            .text("Floodplains")
+
+        }
         function updateFloodplain(year) {
            if (year == 100) {
                map2
@@ -249,6 +378,10 @@
                 .attr("opacity", "0.5");
            }
         }
+/*         function mouseoverArea(e, d) {
+            map
+            .attr("stroke-width", "3px")
+        } */
         const select = document.getElementById('toggle');
 
         select.addEventListener('click', ({ target }) => {
