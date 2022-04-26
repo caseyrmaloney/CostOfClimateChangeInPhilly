@@ -1,56 +1,196 @@
 <!DOCTYPE html>
 <html>
-    <head> 
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/6.7.0/d3.min.js"></script>
-        <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
-        <script src="./floodplains.js"></script>
 
-    </head>
-    <style>
-        #wrapper {
-            display:flex;
-        }
-        #map {
-           width:1200px;
+<head>
+    <meta charset="UTF=8">
+    <title> Cost of Climate Change in Philly </title>
+    <link rel="stylesheet" type="text/css" href="css/stylesheet.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/6.7.0/d3.min.js"></script>
+    <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+    <script src="./floodplains.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,300;0,400;0,700;1,400;1,600&display=swap"
+        rel="stylesheet">
 
-        }
+</head>
 
-        #bar{
-            width:600px;
 
-        }
-        .d3-tip {
-            line-height: 1;
-            font-weight: bold;
-            padding: 12px;
-            background: rgba(255, 255, 255, 0.8);
-            color: rgb(0, 0, 0);
-            border-radius: 2px;
-        }
+<body>
 
-    </style>
-    <body>
+    <header>
+        <div class="headerdiv">
+            <h1> Cost of Climate Change in Philly </h1>
+            <h2> By: Casey, Ben, Marshall, Ryan</h2>
+
+        </div>
+    </header>
+
+    <!-- SECTION 1  -->
+    <!-- WHAT IS CLIAMTE CHANGE -->
+    <section class=" section1">
+
+        <div>
+
+            <div>
+                <h1> What is Climate Change? </h1>
+                <p> Climate change refers to long-term shifts in temperatures and weather patterns. These shifts may be
+                    natural,
+                    such as through variations in the solar cycle.
+                    But since the 1800s, human activities have been the main driver of climate change, primarily due to
+                    burning
+                    fossil fuels like coal, oil and gas. </p>
+            </div>
+
+            <div>
+
+                <p> Main Drivers
+                <ul>
+                    <li> Generating Power </li>
+                    <li> Manufacturing Good </li>
+                    <li> Cutting Down Forest </li>
+                    <li> Using Transportation </li>
+                    <li> Producing Food </li>
+                    <li> Powering Buildings </li>
+                    <li> Consuming to Much </li>
+
+                </ul>
+                </p>
+
+                <p>
+                    Burning fossil fuels generates greenhouse gas emissions that act like a blanket wrapped around the
+                    Earth,
+                    trapping the suns heat and raising temperatures.
+
+                </p>
+            </div>
+
+        </div>
+
+
+
+    </section>
+
+    <!-- SECTION 2  -->
+    <!-- How is climate change already effecting us?  -->
+    <section class="section2">
+        <h1> How is Climate Change Already Affecting Us? </h1>
+        <p> The impact of climate change on different sectors of society are interrelated.
+            Some of the consequences of climate change now include, among other:
+
+        <ul>
+            <li>Intense Droughts </li>
+            <li>Water Scarcity </li>
+            <li>Severe Fires </li>
+            <li> Rising Sea Levels</li>
+            <li> Flooding</li>
+            <li> Melting Polar Ice</li>
+            <li>Catastrophic Storms</li>
+            <li>Declining Biodiversity </li>
+
+        </ul>
+        </p>
+
+    </section>
+
+    <!-- SECTION 3 -->
+    <!-- How is it impact Philadelphia?  -->
+
+
+    <section class="img1"> 
+        <div class="img1div"> 
+            <h1> How is it Impacting Philadelphia? </h1>
+
+        </div>
+
+    </section>
+
+    <section class="img2"> 
+        
+
+    </section>
+
+    <section class="img3"> 
+
+
+    </section>
+
+    <!-- SECTION 4  -->
+    <!-- Temperatures are Rising  -->
+
+    <section class="section4">
+        <h1> Temperatures are Rising </h1>
+
+        <p>Greenhouse gas concentrations are at their highest levels in 2 million years
+            And emissions continue to rise. As a result, the Earth is now about 1.1°C warmer than it was in the late
+            1800s.
+            The last decade (2011-2020) was the warmest on record.</p>
+
+        <p>
+            Many people think climate change mainly means warmer temperatures. But temperature rise is only the
+            beginning of the story.
+            Because the Earth is a system, where everything is connected, changes in one area can influence changes in
+            all others.
+
+        </p>
+    </section>
+
+    <!-- section graphtemp -->
+    <!-- where svg will go for temp and emissions -->
+    <section class="graphtemp">
+
+    </section>
+
+
+    <!-- SECTION 5  -->
+    <!--  How does rising temperature Effect sea level? -->
+    <section class="section5">
+
+        <h1>
+            How does rising temperature Effect sea level?
+        </h1>
+
+        <p> A warming climate can cause seawater to expand and ice over land to melt, both of which can cause a rise in
+            sea level.
+        </p>
+
+        <p>
+            Sea level can rise by two different mechanisms with respect to climate change. First, as the oceans warm due
+            to an increasing global temperature,
+            seawater expands—taking up more space in the ocean basin and causing a rise in water level. The second
+            mechanism is the melting of ice over land, which then adds water to the ocean.
+        </p>
+
+    </section>
+
+
+
+    <section class="floodgraph">
         <div id="wrapper">
             <div id="map">
                 <svg id="floodplains" width="1200" height="900"></svg>
                 <h6>Toggle Floodplains</h6>
                 <form id="toggle" class="btn-group btn-group-toggle" data-toggle="buttons">
-                <label class="btn btn-secondary active">
-                    <input type="radio" name="floodplainToggle" value="100" checked>100-year Floodplains<br>
-                </label>
-                <label class="btn btn-secondary">
-                    <input type="radio" name="floodplainToggle" value="500">500-year Floodplains<br>
-                </label>
+                    <label class="btn btn-secondary active">
+                        <input type="radio" name="floodplainToggle" value="100" checked>100-year Floodplains<br>
+                    </label>
+                    <label class="btn btn-secondary">
+                        <input type="radio" name="floodplainToggle" value="500">500-year Floodplains<br>
+                    </label>
                 </form>
             </div>
             <div id="bar">
-                <svg id="bar1"  width="650" height="400"></svg>
-                <svg id="bar2"  width="650" height="400"></svg>
+                <svg id="bar1" width="650" height="400"></svg>
+                <svg id="bar2" width="650" height="400"></svg>
             </div>
         </div>
-    <br><br>
-    </body>
+        <br><br>
+
+    </section>
+</body>
+
 </html>

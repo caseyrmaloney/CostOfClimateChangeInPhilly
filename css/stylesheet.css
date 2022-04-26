@@ -1,0 +1,152 @@
+body{ 
+    margin: 0;
+    font-family: Montserrat;
+
+}
+
+.headerdiv{ 
+    text-align: center;
+
+}
+
+header{ 
+   
+    height: 100vh;
+    background-size: cover;
+    background-attachment: fixed;
+    background-image: url(../images/Water-Background-Wallpaper-HD-14616.jpeg);
+    justify-content: center;
+    align-items: center;
+    display: flex;
+
+}
+
+section{ 
+    height: 100vh;
+    background-size: cover;
+
+}
+
+.section1{ 
+    background-size: cover;
+    background-attachment: fixed; 
+    background: linear-gradient(#6aaef7, #ffffff);
+   
+}
+
+
+
+.section2{ 
+
+    background-size: cover;
+    background-attachment: fixed;
+    background: linear-gradient(#ffffff, #6aaef7);
+}
+
+.section3{ 
+    background-size: cover;
+    background-attachment: fixed;
+    background: linear-gradient(#6aaef7, #ffffff);
+
+
+}
+
+.img1{ 
+  
+    background-size: cover;
+    background-attachment: fixed;
+    background-image: url(../images/flood1.jpeg);
+    background-position: bottom;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    
+    
+}
+
+.img1div{ 
+    align-items: center;
+    color: #ffffff;
+}
+
+.img2{ 
+  
+    background-size: cover;
+    background-attachment: fixed;
+    background-image: url(../images/flood2.webp);
+    background-position: bottom;
+
+
+    
+
+}
+
+.img3{ 
+   
+
+    background-size: cover;
+    background-attachment: fixed;
+    background-image: url(../images/flood3.jpeg);
+
+    
+
+}
+
+.section4{
+    background-size: cover;
+    background-attachment: fixed;
+    background: linear-gradient(#ffffff, #6aaef7);
+
+
+}
+
+.graphtemp{ 
+    background: linear-gradient(#6aaef7, #ffffff);
+
+}
+
+.section5{
+    background-size: cover;
+    background-attachment: fixed;
+    background: linear-gradient(#ffffff, #6aaef7);
+
+
+}
+
+.floodgraph{
+    background-size: cover;
+    background-attachment: fixed;
+    background: linear-gradient(#6aaef7, #ffffff);
+
+
+}
+
+
+
+
+
+
+#wrapper {
+    display: flex;
+}
+
+#map {
+    width: 1200px;
+
+}
+
+#bar {
+    width: 600px;
+
+
+
+}
+
+.d3-tip {
+    line-height: 1;
+    font-weight: bold;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.8);
+    color: rgb(0, 0, 0);
+    border-radius: 2px;
+}
