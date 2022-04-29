@@ -50,7 +50,6 @@
             ))
         });
        const distinctValues = Array.from(yearlyFloodData.get("Airport").keys());
-       // console.log(yearlyFloodData.get("Airport"))
        console.log(distinctValues);
         var x = d3.scaleBand()
         .domain(distinctValues)
@@ -61,14 +60,9 @@
         .domain([0, 4])
         .range([barHeight, 50]);
 
-       // tip = d3.tip().attr('class', 'd3-tip').html(function(d) { return d; });
-
-       // console.log(yearlyFloodData)
         var blues = d3.scaleSequential()
         .domain(d3.extent(floodDict.values()))
         .range(['#deebf7', '#3182bd'])
-       //console.log(floodplains.features)
-
 
         var scaleCircles = d3.scaleLinear()
         .domain(d3.extent(floodDict.values()))
@@ -83,7 +77,6 @@
         const bar2 = d3.select("#bar2").append("g").attr('transform', 'translate(50,0)');
         var bar1Set = false;
 
-      //  svg.call(tip)
         let map = svg.append('g')
         .selectAll("path")
         .data(philadelphia.features)
@@ -105,14 +98,11 @@
             d3.select('#tooltip').transition()
             .duration(100).style('opacity', 1)
             .text(d.properties.name)
-            //tip.show(d.);
-            //console.log(e)
         })
         .on('mouseout', function(e, d) {
             d3.select(this)
             .attr("stroke-width", "1px");
             d3.select('#tooltip').style('opacity', 0)
-            //tip.hide;
         })
         .on('mousemove', function(e, d) {
             d3.select('#tooltip')
@@ -132,7 +122,6 @@
         })
         .attr("r", (d) => {
             if (floodDict.has(d.properties.name)) {
-                //console.log(d)
                 return scaleCircles(floodDict.get(d.properties.name))
             }
             else return 0;
@@ -176,7 +165,6 @@
         .join("path")
         .attr("d", floodPath)
         .attr("fill", (d) => {
-           // console.log(d)
             return "none";
         })
         .attr("stroke", "#4f8fbc")
@@ -190,12 +178,10 @@
         .join("path")
         .attr("d", floodPath)
         .attr("fill", (d) => {
-            //console.log(d)
             return "none";
         })
         .attr("stroke", "4f8fbc")
         .attr("stroke-width", "0px")
-       // .on('mouseover', (d) => mouseoverArea(d));
         
        drawLegend();
         function drawBars(location) {
@@ -221,12 +207,10 @@
                     return x(d.year);
                 })
                 .attr("y", (d) => {
-                    //console.log(y(d.value))
                     return y(d.value);
                 })
                 .attr("width", "35px")
                 .attr("height", function(d) { 
-                // console.log(y(+d.value))
                     return barHeight - y(+d.value); })
                 .attr("fill", "#0c407c");
                 
@@ -378,10 +362,6 @@
                 .attr("opacity", "0.5");
            }
         }
-/*         function mouseoverArea(e, d) {
-            map
-            .attr("stroke-width", "3px")
-        } */
         const select = document.getElementById('toggle');
 
         select.addEventListener('click', ({ target }) => {
