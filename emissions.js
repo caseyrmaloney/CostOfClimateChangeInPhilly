@@ -10,44 +10,12 @@
 		//avg annual temps, data collected and reformatted from https://www.weather.gov/wrh/climate?wfo=phi
 		const temps = data[1];
 	
-	// console.log(ems);
-	// console.log(temps);
-	
-	// ems.forEach((x,i) => 
-	// console.log(x.Year + " " + x['CO2 in Mt']))
-
-	// const distinctYears = [...new Set(ems.map((d) => d.Year))]
-
-	// var svg =d3.select('leftgraph')
-	// 	.apprend("svg")
-	// 	.attr("width",width)
-	// 	.attr("height",height)
-	// 	.append("g")
-	// 	.attr("transform" , "translate(50, 50)");
-
-	// var x = d3.scaleLinear()
-	// 	.domain([0,300])
-	// 	.range([0,width]);
-
-	// var y = d3.scaleBand()
-	// 	.domain(distinctYears)
-	// 	.range([0,height])
-	// 	.padding(0.1);
-
-	// svg.selectAll("rect")
-	// 	.data(ems)
-	// 	.join('rect')
-	// 	.attr("x",100)
-	// 	.attr("y", function(d){return d.Year})
-	// 	.attr("width", function(d){return d['CO2 in Mt']})
-	// 	.attr("height", y.bandwidth() )
-    // 	.attr("fill", "#69b3a2")
 
 	var margin = {top: 20, right: 30, bottom: 40, left: 90},
     width = 800 - margin.left - margin.right,
     height = 700 - margin.top - margin.bottom;
 
-// append the svg object to the body of the page
+// append the svg object to the body of the page, svg is for emissions graph
 var svg = d3.select("#leftgraph")
   .append("svg")
     .attr("width", width + margin.left + margin.right)
@@ -56,6 +24,13 @@ var svg = d3.select("#leftgraph")
     .attr("transform",
           "translate(" + margin.left + "," + margin.top + ")");
 
+//rsvg is for temperature graph
+var rsvg = d3.select("rightgraph")
+	.append("svg")
+	.attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom + 10)
+	.append("g")
+	.attr("transform", "translate(" + (width + margin.right + (2*margin.left)) + "," + margin.top + ")");
 // Parse the Data
 
 
