@@ -3,8 +3,8 @@
     var barWidth = 550, barHeight=350;
     Promise.all([
         d3.json("./data/floodplains/philadelphia.geojson"),
-        d3.json("./data/floodplains/FEMA_100_Flood_Plain2.geojson"),
-        d3.json("./data/floodplains/FEMA_500_Flood_Plain2.geojson"),
+        d3.json("./data/floodplains/FEMA_100_flood_Plain2.geojson"),
+        d3.json("./data/floodplains/FEMA_500_flood_Plain2.geojson"),
         d3.csv("./data/floodplains/floodcounts.csv"),
         d3.csv("./data/floodplains/yearly_floodcounts.csv")
     ]).then((data) => {
