@@ -105,9 +105,11 @@ rsvg.append("text")
 
 
 	//y axis label for both graphs chrono ordering
-  svg.append("g")
+  let yAxis = svg.append("g")
+	.attr("class", "yaxis")
     .call(d3.axisLeft(y))
 
+	console.log(yAxis);
   //Bars for emissions
   svg.selectAll("rect")
     .data(ems)
@@ -157,6 +159,12 @@ rsvg.selectAll("rect")
 		.select("title")
 		   .text(function(d) {return d[1].Year + ": " + d[1]['CO2 in Mt'];})
 	
+
+		svg.select(".yaxis")
+			.transition()
+			.duration(500)
+			.call(d3.axisLeft(emis_y));
+
 		//right graph
 		rsvg.selectAll("rect")
 			.data(temps)
@@ -190,6 +198,11 @@ rsvg.selectAll("rect")
 			.select("title")
 			.text(function(d) {return d.Year + ": " + d['CO2 in Mt'];})
 		
+			svg.select(".yaxis")
+			.transition()
+			.duration(500)
+			.call(d3.axisLeft(y));
+
 		  //right graph
 		  rsvg.selectAll("rect")
 			.data(temps)
@@ -220,6 +233,11 @@ rsvg.selectAll("rect")
 				.attr("fill", "#B6A67D")
 				.select("title")
 				.text(function(d) {return d.Year + ": " + d['CO2 in Mt'];})
+
+				svg.select(".yaxis")
+				.transition()
+				.duration(500)
+				.call(d3.axisLeft(temps_y));
 			
 			  //right graph
 			  rsvg.selectAll("rect")
