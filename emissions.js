@@ -18,7 +18,7 @@
 		var ems_sorted = ems_array.sort((a,b) => b[1]['CO2 in Mt']-a[1]['CO2 in Mt'])
 		ems_sorted.pop();
 		
-		ems_sorted.forEach(element => console.log(element[1]))
+		//ems_sorted.forEach(element => console.log(element[1]))
 
 		var temps_sorted =  Object.entries(temps).sort((a,b) => b[1]['Avg Temp'] - a[1]['Avg Temp'])
 		temps_sorted.pop();
@@ -59,19 +59,18 @@ var r_x = d3.scaleLinear()
     .range([ 0, width]);
 
 
-	// Y axis for both
+	// Y axis for both chrono
 	var y = d3.scaleBand()
 	  .range([ 0, height ])
 	  .domain(ems.map(function(d) { return d.Year; }))
 	  .padding(.1);
 	
-
+		//Y axis for both emissions
 	var emis_y = d3.scaleBand()
 	  .range([ 0, height ])
 	  .domain(ems_sorted.map(function(d) { return d[1].Year; }))
 	  .padding(.1);
 
-	  console.log(emis_y('1990'));
   
 
 	// x axis labels for emissions
@@ -90,7 +89,7 @@ var r_x = d3.scaleLinear()
     .attr("y", height + margin.top + margin.bottom - 15)
 	  .text("Mt of CO2 Emitted");
 
-	  	// x axis labels for temps
+	// x axis labels for temps
   rsvg.append("g")
   .attr("transform", "translate(0," + height + ")")
   .call(d3.axisBottom(r_x))
@@ -107,23 +106,26 @@ rsvg.append("text")
 	.text("Average annual temperature in degrees Fahrenheit");
 
 
-	//y axis label for both
+	//y axis label for both graphs chrono ordering
   svg.append("g")
     .call(d3.axisLeft(y))
 
-  //Bars for emis
+  //Bars for emissions
   svg.selectAll("rect")
     .data(ems)
     .join("rect")
-    .attr("x", function(d) {
-	//console.log(x(d['CO2 in Mt']))
-	return x(d['CO2 in Mt']); } )
-    .attr("y", function(d) {
-		return y(d.Year); })
-    .attr("width", function(d) { 
-		return (x(0)-x(d['CO2 in Mt'])); })
+    .attr("x", function(d) {return x(d['CO2 in Mt']); } )
+    .attr("y", function(d) {return y(d.Year); })
+    .attr("width", function(d) { return (x(0)-x(d['CO2 in Mt'])); })
     .attr("height", y.bandwidth() )
     .attr("fill", "#B6A67D")
+
+	// svg.selectAll("rect")
+	// .append("title")
+	// .data(ems)
+	// .text(function(d) {
+	// 	return d.Year + ": " + d['CO2 in Mt'];
+	// })
 
 	// svg.selectAll("rect")
 	// .append("title")
@@ -150,29 +152,12 @@ rsvg.selectAll("rect")
 		.join("rect")
 		  .transition()
 		  .duration(500)
-		  .attr("x", function(d) {
-			//console.log(x(d[1]['CO2 in Mt']));  
-			return x(d[1]['CO2 in Mt']); } )
-		  .attr("y", function(d) {
-			 // if(d[i][0]!='Year'){
-			console.log(d[1].Year);
-			console.log(emis_y(d[1].Year))
-			return emis_y(d[1].Year);
-			//  }
-		  })
-		  .attr("width", function(d) {
-			  //console.log(x(d[1]['CO2 in Mt'])) 
-			return (x(0)-x(d[1]['CO2 in Mt'])); })
+		  .attr("x", function(d) { return x(d[1]['CO2 in Mt']); } )
+		  .attr("y", function(d) {return emis_y(d[1].Year); })
+		  .attr("width", function(d) {return (x(0)-x(d[1]['CO2 in Mt'])); })
 		.attr("height", emis_y.bandwidth() )
 		.attr("fill", "#B6A67D")
 	
-		  svg.selectAll("rect")
-		  .append("title")
-		  .data(ems_sorted)
-		  .text(function(d,i) {
-			  //console.log(d);
-			  return d[1].Year + ": " + d[1]['CO2 in Mt'];
-		  })
 
 		  rsvg.selectAll("rect")
 			.data(temps)
@@ -184,7 +169,36 @@ rsvg.selectAll("rect")
 			.attr("width",function(d) {return r_x(d['Avg Temp']);})
 			.attr("height", y.bandwidth() )
     		.attr("fill", "#D43F1E")
+
 		})
+
+		
+
+	d3.select("#byChronological").on("click", function() {
+		svg.selectAll("rect")
+			.data(ems)
+			.join("rect")
+			  .transition()
+			  .duration(500)
+			  .attr("x", function(d) {return x(d['CO2 in Mt']); } )
+			  .attr("y", function(d) {return y(d.Year);})
+			  .attr("width", function(d) {return (x(0)-x(d['CO2 in Mt'])); })
+			.attr("height", y.bandwidth() )
+			.attr("fill", "#B6A67D")
+		
+	
+			  rsvg.selectAll("rect")
+				.data(temps)
+				.join("rect")
+				.transition()
+				.duration(500)
+				.attr("x", function(d) {return r_x(0)})
+				.attr("y", function(d) { return y(d.Year); })
+				.attr("width",function(d) {return r_x(d['Avg Temp']);})
+				.attr("height", y.bandwidth() )
+				.attr("fill", "#D43F1E")
+
+			})
 })
 })();
 
