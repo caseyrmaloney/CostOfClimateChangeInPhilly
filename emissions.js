@@ -118,19 +118,11 @@ rsvg.append("text")
     .attr("height", y.bandwidth() )
     .attr("fill", "#B6A67D")
 
-	// svg.selectAll("rect")
-	// .append("title")
-	// .data(ems)
-	// .text(function(d) {
-	// 	return d.Year + ": " + d['CO2 in Mt'];
-	// })
-
-	// svg.selectAll("rect")
-	// .append("title")
-	// .data(ems)
-	// .text(function(d,i) {
-	// 	return d.Year + ": " + d['CO2 in Mt'];
-	// })
+	//left graph mouseover info
+	svg.selectAll("rect")
+	.append("title")
+	.data(ems)
+	.text(function(d) {return d.Year + ": " + d['CO2 in Mt'];})
 
 //bars for temp
 rsvg.selectAll("rect")
@@ -142,22 +134,31 @@ rsvg.selectAll("rect")
 	.attr("height", y.bandwidth() )
     .attr("fill", "#D43F1E")
 
+	//right graph mouseover info
+rsvg.selectAll("rect")
+	.append("title")
+	.data(temps)
+	.text(function(d) {return d.Year + ": " + d['Avg Temp'];})
+
 
 	//transformation function for sorting by emissions from highest to lowest
-  d3.select("#byEmis").on("click", function() {
-	svg.selectAll("rect")
+	d3.select("#byEmis").on("click", function() {
+		//left graph
+		svg.selectAll("rect")
 		.data(ems_sorted)
 		.join("rect")
-		  .transition()
-		  .duration(500)
-		  .attr("x", function(d) { return x(d[1]['CO2 in Mt']); } )
-		  .attr("y", function(d) {return emis_y(d[1].Year); })
-		  .attr("width", function(d) {return (x(0)-x(d[1]['CO2 in Mt'])); })
-		.attr("height", emis_y.bandwidth() )
-		.attr("fill", "#B6A67D")
+			.transition()
+			.duration(500)
+			.attr("x", function(d) { return x(d[1]['CO2 in Mt']); } )
+			.attr("y", function(d) {return emis_y(d[1].Year); })
+			.attr("width", function(d) {return (x(0)-x(d[1]['CO2 in Mt'])); })
+			.attr("height", emis_y.bandwidth() )
+			.attr("fill", "#B6A67D")
+		.select("title")
+		   .text(function(d) {return d[1].Year + ": " + d[1]['CO2 in Mt'];})
 	
-
-		  rsvg.selectAll("rect")
+		//right graph
+		rsvg.selectAll("rect")
 			.data(temps)
 			.join("rect")
 			.transition()
@@ -167,12 +168,15 @@ rsvg.selectAll("rect")
 			.attr("width",function(d) {return r_x(d['Avg Temp']);})
 			.attr("height", y.bandwidth() )
     		.attr("fill", "#D43F1E")
+			.select("title")
+			.text(function(d) {return d.Year + ": " + d['Avg Temp'];})
 
 		})
 
 		
-		//transformation function for going back to chrono sort
+	//transformation function for going back to chrono sort
 	d3.select("#byChronological").on("click", function() {
+		//left graph
 		svg.selectAll("rect")
 			.data(ems)
 			.join("rect")
@@ -183,8 +187,10 @@ rsvg.selectAll("rect")
 			  .attr("width", function(d) {return (x(0)-x(d['CO2 in Mt'])); })
 			.attr("height", y.bandwidth() )
 			.attr("fill", "#B6A67D")
+			.select("title")
+			.text(function(d) {return d.Year + ": " + d['CO2 in Mt'];})
 		
-	
+		  //right graph
 		  rsvg.selectAll("rect")
 			.data(temps)
 			.join("rect")
@@ -195,10 +201,13 @@ rsvg.selectAll("rect")
 			.attr("width",function(d) {return r_x(d['Avg Temp']);})
 			.attr("height", y.bandwidth() )
 			.attr("fill", "#D43F1E")
+			.select("title")
+			.text(function(d) {return d.Year + ": " + d['Avg Temp'];})
 		})
 
 		//transformation function for temperature sort
 		d3.select("#byTemp").on("click", function() {
+			//left graph
 			svg.selectAll("rect")
 				.data(ems)
 				.join("rect")
@@ -209,8 +218,10 @@ rsvg.selectAll("rect")
 				  .attr("width", function(d) {return (x(0)-x(d['CO2 in Mt'])); })
 				.attr("height", y.bandwidth() )
 				.attr("fill", "#B6A67D")
+				.select("title")
+				.text(function(d) {return d.Year + ": " + d['CO2 in Mt'];})
 			
-		
+			  //right graph
 			  rsvg.selectAll("rect")
 				.data(temps_sorted)
 				.join("rect")
@@ -221,6 +232,8 @@ rsvg.selectAll("rect")
 				.attr("width",function(d) {return r_x(d[1]['Avg Temp']);})
 				.attr("height", y.bandwidth() )
 				.attr("fill", "#D43F1E")
+				.select("title")
+			.text(function(d) {return d[1].Year + ": " + d[1]['Avg Temp'];})
 			})
 })
 })();
