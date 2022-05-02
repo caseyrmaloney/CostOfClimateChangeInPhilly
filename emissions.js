@@ -21,7 +21,7 @@
 
 	var margin = {top: 20, right: 10, bottom: 40, left: 90},
     width = 800 - margin.left - margin.right,
-    height = 900 - margin.top - margin.bottom;
+    height = 800 - margin.top - margin.bottom;
 
 // append the svg object to the body of the page, svg is for emissions graph
 var svg = d3.select("#leftgraph")
@@ -77,7 +77,8 @@ var r_x = d3.scaleLinear()
     .call(d3.axisBottom(x))
     .selectAll("text")
       .attr("transform", "translate(-10,0)rotate(-45)")
-      .style("text-anchor", "end");
+      .style("text-anchor", "end")
+	  .style("font", "14px times");
 
 	  //x axis title for emissions
   svg.append("text")
@@ -85,6 +86,7 @@ var r_x = d3.scaleLinear()
     .attr("text-anchor", "end")
     .attr("x", width/2)
     .attr("y", height + margin.top + margin.bottom - 15)
+	.style("font", "22px times")
 	  .text("Mt of CO2 Emitted");
 
 	// x axis labels for temps
@@ -93,7 +95,8 @@ var r_x = d3.scaleLinear()
   .call(d3.axisBottom(r_x))
   .selectAll("text")
 	.attr("transform", "translate(-10,0)rotate(-45)")
-	.style("text-anchor", "end");
+	.style("text-anchor", "end")
+	.style("font", "14px times");
 
 	//x axis title for temps
 rsvg.append("text")
@@ -101,15 +104,17 @@ rsvg.append("text")
   .attr("text-anchor", "end")
   .attr("x", width-40)
   .attr("y", height + margin.top + margin.bottom - 15)
+  	.style("font", "22px times")
 	.text("Average annual temperature in degrees Fahrenheit");
 
 
 	//y axis label for both graphs chrono ordering
   let yAxis = svg.append("g")
 	.attr("class", "yaxis")
+	.style("font", "18px times")
     .call(d3.axisLeft(y))
 
-	console.log(yAxis);
+
   //Bars for emissions
   svg.selectAll("rect")
     .data(ems)
@@ -118,7 +123,9 @@ rsvg.append("text")
     .attr("y", function(d) {return y(d.Year); })
     .attr("width", function(d) { return (x(0)-x(d['CO2 in Mt'])); })
     .attr("height", y.bandwidth() )
-    .attr("fill", "#B6A67D")
+    .attr("fill", "#999999")
+	.attr("stroke", "#949494")
+	.attr("stroke-width","1.5")
 
 	//left graph mouseover info
 	svg.selectAll("rect")
@@ -134,7 +141,9 @@ rsvg.selectAll("rect")
 	.attr("y", function(d) { return y(d.Year); })
 	.attr("width",function(d) {return r_x(d['Avg Temp']);})
 	.attr("height", y.bandwidth() )
-    .attr("fill", "#D43F1E")
+    .attr("fill", "#ff564a")
+	.attr("stroke", "#bd4040")
+	.attr("stroke-width","1.5")
 
 	//right graph mouseover info
 rsvg.selectAll("rect")
@@ -155,7 +164,6 @@ rsvg.selectAll("rect")
 			.attr("y", function(d) {return emis_y(d[1].Year); })
 			.attr("width", function(d) {return (x(0)-x(d[1]['CO2 in Mt'])); })
 			.attr("height", emis_y.bandwidth() )
-			.attr("fill", "#B6A67D")
 		.select("title")
 		   .text(function(d) {return d[1].Year + ": " + d[1]['CO2 in Mt'];})
 	
@@ -175,7 +183,6 @@ rsvg.selectAll("rect")
 			.attr("y", function(d) { return emis_y(d.Year); })
 			.attr("width",function(d) {return r_x(d['Avg Temp']);})
 			.attr("height", y.bandwidth() )
-    		.attr("fill", "#D43F1E")
 			.select("title")
 			.text(function(d) {return d.Year + ": " + d['Avg Temp'];})
 
@@ -194,7 +201,6 @@ rsvg.selectAll("rect")
 			  .attr("y", function(d) {return y(d.Year);})
 			  .attr("width", function(d) {return (x(0)-x(d['CO2 in Mt'])); })
 			.attr("height", y.bandwidth() )
-			.attr("fill", "#B6A67D")
 			.select("title")
 			.text(function(d) {return d.Year + ": " + d['CO2 in Mt'];})
 		
@@ -213,7 +219,6 @@ rsvg.selectAll("rect")
 			.attr("y", function(d) { return y(d.Year); })
 			.attr("width",function(d) {return r_x(d['Avg Temp']);})
 			.attr("height", y.bandwidth() )
-			.attr("fill", "#D43F1E")
 			.select("title")
 			.text(function(d) {return d.Year + ": " + d['Avg Temp'];})
 		})
@@ -230,7 +235,6 @@ rsvg.selectAll("rect")
 				  .attr("y", function(d) {return temps_y(d.Year);})
 				  .attr("width", function(d) {return (x(0)-x(d['CO2 in Mt'])); })
 				.attr("height", y.bandwidth() )
-				.attr("fill", "#B6A67D")
 				.select("title")
 				.text(function(d) {return d.Year + ": " + d['CO2 in Mt'];})
 
@@ -238,6 +242,7 @@ rsvg.selectAll("rect")
 				.transition()
 				.duration(500)
 				.call(d3.axisLeft(temps_y));
+
 			
 			  //right graph
 			  rsvg.selectAll("rect")
@@ -249,7 +254,6 @@ rsvg.selectAll("rect")
 				.attr("y", function(d) { return temps_y(d[1].Year); })
 				.attr("width",function(d) {return r_x(d[1]['Avg Temp']);})
 				.attr("height", y.bandwidth() )
-				.attr("fill", "#D43F1E")
 				.select("title")
 			.text(function(d) {return d[1].Year + ": " + d[1]['Avg Temp'];})
 			})
