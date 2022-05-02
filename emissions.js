@@ -1,6 +1,5 @@
 (function(){
 
-	//doing it this way seems slow how could we improve performance?
 	Promise.all([
 		d3.csv("./data/temps/emissions_formatted.csv"),
 		d3.csv("./data/temps/avg_annual_temps.csv")
@@ -12,20 +11,14 @@
 
 		//array of [index,{year, co2}] in chronological order
 		var ems_array = Object.entries(ems)
-		// console.log((ems_array));
 
 		//array of [index,{year, co2}] in emissions order
 		var ems_sorted = ems_array.sort((a,b) => b[1]['CO2 in Mt']-a[1]['CO2 in Mt'])
 		ems_sorted.pop();
-		
-		//ems_sorted.forEach(element => console.log(element[1]))
 
 		var temps_sorted =  Object.entries(temps).sort((a,b) => b[1]['Avg Temp'] - a[1]['Avg Temp'])
 		temps_sorted.pop();
 
-		//temps_sorted.forEach(element => console.log(element[1]['Avg Temp']))
-
-		//console.log(temps_sorted);
 	var margin = {top: 20, right: 10, bottom: 40, left: 90},
     width = 800 - margin.left - margin.right,
     height = 900 - margin.top - margin.bottom;
@@ -65,12 +58,17 @@ var r_x = d3.scaleLinear()
 	  .domain(ems.map(function(d) { return d.Year; }))
 	  .padding(.1);
 	
-		//Y axis for both emissions
+	//Y axis for both emissions
 	var emis_y = d3.scaleBand()
 	  .range([ 0, height ])
 	  .domain(ems_sorted.map(function(d) { return d[1].Year; }))
 	  .padding(.1);
 
+	//Y axis for both temps
+	var temps_y = d3.scaleBand()
+		.range([ 0, height ])
+		.domain(temps_sorted.map(function(d) { return d[1].Year; }))
+		.padding(.1);
   
 
 	// x axis labels for emissions
@@ -173,7 +171,7 @@ rsvg.selectAll("rect")
 		})
 
 		
-
+		//transformation function for going back to chrono sort
 	d3.select("#byChronological").on("click", function() {
 		svg.selectAll("rect")
 			.data(ems)
@@ -187,17 +185,42 @@ rsvg.selectAll("rect")
 			.attr("fill", "#B6A67D")
 		
 	
+		  rsvg.selectAll("rect")
+			.data(temps)
+			.join("rect")
+			.transition()
+			.duration(500)
+			.attr("x", function(d) {return r_x(0)})
+			.attr("y", function(d) { return y(d.Year); })
+			.attr("width",function(d) {return r_x(d['Avg Temp']);})
+			.attr("height", y.bandwidth() )
+			.attr("fill", "#D43F1E")
+		})
+
+		//transformation function for temperature sort
+		d3.select("#byTemp").on("click", function() {
+			svg.selectAll("rect")
+				.data(ems)
+				.join("rect")
+				  .transition()
+				  .duration(500)
+				  .attr("x", function(d) {return x(d['CO2 in Mt']); } )
+				  .attr("y", function(d) {return temps_y(d.Year);})
+				  .attr("width", function(d) {return (x(0)-x(d['CO2 in Mt'])); })
+				.attr("height", y.bandwidth() )
+				.attr("fill", "#B6A67D")
+			
+		
 			  rsvg.selectAll("rect")
-				.data(temps)
+				.data(temps_sorted)
 				.join("rect")
 				.transition()
 				.duration(500)
 				.attr("x", function(d) {return r_x(0)})
-				.attr("y", function(d) { return y(d.Year); })
-				.attr("width",function(d) {return r_x(d['Avg Temp']);})
+				.attr("y", function(d) { return temps_y(d[1].Year); })
+				.attr("width",function(d) {return r_x(d[1]['Avg Temp']);})
 				.attr("height", y.bandwidth() )
 				.attr("fill", "#D43F1E")
-
 			})
 })
 })();
