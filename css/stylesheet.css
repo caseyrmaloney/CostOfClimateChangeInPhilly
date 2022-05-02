@@ -63,6 +63,16 @@ h1{
     
 }
 
+.divs2{ 
+    display: inline-block;
+    justify-content: center;
+    align-items: center;
+    width: 70vw; 
+    height: 10vh;
+    
+    
+}
+
 .divsec12{ 
    padding: 0px 30px;
    
@@ -152,8 +162,8 @@ h1{
 
 .graphtemp{ 
     background: linear-gradient(#6aaef7, #ffffff);
-
 }
+
 
 .section5{
     justify-content: center;
@@ -177,7 +187,11 @@ h1{
 
 
 
-
+.graphtemp{
+	display: grid;
+	grid-template-columns: 800px 800px;
+	gap: 0px;
+}
 
 
 #wrapper {
