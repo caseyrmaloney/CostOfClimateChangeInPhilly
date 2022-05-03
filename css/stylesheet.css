@@ -1,6 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,300;0,400;0,700;1,400;1,600&family=Oleo+Script+Swash+Caps&display=swap');
 body{ 
+
     margin: 0;
-    font-family: 'Noto Sans TC';
+}
+
+.title{ 
+    color: rgb(0, 19, 126);
+    font-family: "Montserrat";
+    font-size: 100px;
+}
+
+.author{
+    color: rgb(0, 19, 126);
+    font-family: "Montserrat";
+
 }
 
 .headerdiv{ 
@@ -9,11 +22,10 @@ body{
 }
 
 header{ 
+    background-image: url(../images/hand-painted-watercolor-abstract-watercolor-background_23-2149009911.webp);
+    background-size: cover;
    
     height: 100vh;
-    background-size: cover;
-    background-attachment: fixed;
-    background-image: url(../images/Water-Background-Wallpaper-HD-14616.jpeg);
     justify-content: center;
     align-items: center;
     display: flex;
@@ -23,29 +35,38 @@ header{
 section{ 
     height: 100vh;
     background-size: cover;
+    background-image: url(../images/hand-painted-watercolor-abstract-watercolor-background_23-2149009911.webp);
 
 }
 
 p{ 
     font-size: 20px;
+    font-family: "Montserrat";
+    color: rgb(59, 59, 59);
 }
 
 li{ 
     font-size: 20px;
+    color: rgb(59, 59, 59);
+    font-family: "Montserrat";
+}
+
+h1{ 
+    font-family: "Montserrat";
+
 }
 
 
-h1{ 
+.sectiontitle{ 
     padding: 15px 10px; 
     text-align: center;
-    color: #19405a;
-    text-decoration: underline; 
+    color: rgb(0, 19, 126);
+    font-family: 'Montserrat';
     
 }
 .section1{ 
     background-size: cover;
     background-attachment: fixed; 
-    background: linear-gradient(#6aaef7, #ffffff);
     justify-content: center;
     align-items: center;
     display: flex;
@@ -85,7 +106,6 @@ h1{
 
     background-size: cover;
     background-attachment: fixed;
-    background: linear-gradient(#ffffff, #6aaef7);
     justify-content: center;
     align-items: center;
     display: flex;
@@ -101,7 +121,6 @@ h1{
 .section3{ 
     background-size: cover;
     background-attachment: fixed;
-    background: linear-gradient(#6aaef7, #ffffff);
     justify-content: center;
     align-items: center;
     display: flex;
@@ -155,14 +174,11 @@ h1{
     display: flex;
     background-size: cover;
     background-attachment: fixed;
-    background: linear-gradient(#ffffff, #6aaef7);
 
 
 }
 
-.graphtemp{ 
-    background: linear-gradient(#6aaef7, #ffffff);
-}
+
 
 
 .section5{
@@ -171,7 +187,6 @@ h1{
     display: flex;
     background-size: cover;
     background-attachment: fixed;
-    background: linear-gradient(#ffffff, #6aaef7);
 
 
 }
@@ -180,7 +195,7 @@ h1{
    
     background-size: cover;
     background-attachment: fixed;
-    background: linear-gradient(#6aaef7, #ffffff);
+    background-image: url(../images/hand-painted-watercolor-abstract-watercolor-background_23-2149009911.webp);
 
 
 }
@@ -218,3 +233,21 @@ h1{
     color: rgb(0, 0, 0);
     border-radius: 2px;
 }
+
+.expect{ 
+    padding-top: 40em;
+    padding-bottom: 40em;
+    background-size: cover;
+    background-attachment: fixed; 
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    background-image: url(../images/hand-painted-watercolor-abstract-watercolor-background_23-2149009911.webp);
+  
+}
+
+.img{ 
+    height: 40vh; 
+    margin: 10px 10px; 
+}
+
